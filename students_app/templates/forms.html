@@ -1,0 +1,16 @@
+<!-- forms.html -->
+{{if .Success}}
+<h1>Thanks for your input!</h1>
+<form action="/">
+    <input type="submit" value="Go back to main page" />
+</form>
+{{else}}
+<h1>{{.title}}</h1>
+<form method="POST" action="/submit">
+    <label>Rollnumber:</label><br />
+    <input type="number" name="ID"><br />
+    <label>Name:</label><br />
+    <input type="text" name="Name"><br />
+    <input type="submit">
+</form>
+{{end}}

@@ -21,7 +21,6 @@ points to cover
   - traditional ways of maintaining infra
     - ways to deploy
     - ssh
-      - 
     - pull based (redis)
     - pros and cons
     - security setup - (restrict ssh access to servers mostly, or to cloud accounts)
@@ -84,6 +83,24 @@ Flowchart
 points to segue
 
 outline is made so that aud understands the current system on which the new approach is based.
+
+
+
+# Db commands
+
+to connect 
+psql <connection string>
+run a script 
+\i <path to script>
+show dbs
+\l
+
+show tables
+\dt
+
+## connect to DO dbs
+https://docs.digitalocean.com/products/databases/postgresql/how-to/connect/
+
 
 
 

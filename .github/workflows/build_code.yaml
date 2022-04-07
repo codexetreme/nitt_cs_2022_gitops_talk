@@ -1,0 +1,68 @@
+name: Build students app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - students_app/**
+#  pull_request:
+#    branches: [ $default-branch ]
+
+env:
+  REGISTRY: registry.digitalocean.com
+  IMAGE_NAME: students-app
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./students_app
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DO_API_TOKEN }}
+          password: ${{ secrets.DO_API_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/capybara/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=v-
+
+      - name: set tag env
+        run: echo "DOCKERTAG=$(echo ${{ steps.meta.outputs.tags }} | cut -d ':' -f2)" >> $GITHUB_ENV
+
+      - name: set version on BUILD file
+        run: echo $DOCKERTAG > config/BUILD
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./packages/backend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ github.sha }}
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+      - name: install yq
+        run: |
+          wget https://github.com/mikefarah/yq/releases/download/v4.20.2/yq_linux_amd64 -O /tmp/yq
+          chmod +x /tmp/yq
+
+      - name: deploy
+        run: |
+          doctl apps spec get 737d67c8-b639-46ab-992a-adcb6375da3b > deploy.yaml
+          /tmp/yq -i '.services[0].image.tag = env(DOCKERTAG)' deploy.yaml
+          doctl apps update 737d67c8-b639-46ab-992a-adcb6375da3b --spec deploy.yaml --wait
