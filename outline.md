@@ -102,5 +102,8 @@ show tables
 https://docs.digitalocean.com/products/databases/postgresql/how-to/connect/
 
 
+# run script
+
+psql "connstr" -f ./path/to/file
 
 
