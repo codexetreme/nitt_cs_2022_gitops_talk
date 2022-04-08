@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - prep
-#    paths:
-#      - students_app/**
+    paths:
+      - students_app/**
 #  pull_request:
 #    branches: [ $default-branch ]
 

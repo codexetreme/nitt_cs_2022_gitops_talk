@@ -13,7 +13,7 @@ import (
 	"os"
 )
 
-var dbConnStr = os.Getenv("DB_CONN_STR")
+var dbConnStr = os.Getenv("DATABASE_URL")
 
 type student struct {
 	ID   string `json:"rollnumber"`
