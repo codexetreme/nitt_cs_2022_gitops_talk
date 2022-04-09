@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - demo
-    paths:
-      - students_app/**
+#    paths:
+#      - students_app/**
 
 env:
   REGISTRY: registry.digitalocean.com
