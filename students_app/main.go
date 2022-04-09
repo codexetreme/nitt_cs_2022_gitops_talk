@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"embed"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq" // add this
 	"log"
 	"net/http"
 	"os"
