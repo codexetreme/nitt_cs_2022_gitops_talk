@@ -1,0 +1,17 @@
+<h1>{{.title}}</h1>
+<table>
+    <tr>
+        <th>Roll Number</th>
+        <th>Name</th>
+    </tr>
+    {{ range .Results }}
+        <tr>
+            <td>{{ .ID }}</td>
+            <td>{{ .Name }}</td>
+        </tr>
+    {{ end }}
+</table>
+<br>
+<form action="/">
+    <input type="submit" value="Go back to main page" />
+</form>
