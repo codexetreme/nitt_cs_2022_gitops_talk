@@ -1,0 +1,7 @@
+digitalocean_database_cluster.postgres: Refreshing state... [id=6d6b6c0e-3e5f-432d-bfe7-bbff2002e43f]
+
+No changes. Infrastructure is up-to-date.
+
+This means that Terraform did not detect any differences between your
+configuration and the remote system(s). As a result, there are no actions to
+take.
