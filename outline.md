@@ -46,7 +46,7 @@ Demo
 
 code
 2 apis 
--> get my pets - returns (random values like sadlkjf,akjsdf in stage) (proper animals in prod) - based on env variable - animals
+-> users creation
 -> healthcheck - shows the mode, commit sha, time
 
 we add a new update 
@@ -67,6 +67,21 @@ we add a new update
   - 
   - deploy to stage via push to this repo
   - deploy to prod via push to this repo
+- Demo
+  - Repo prep
+    - explain the DO API in secrets
+    - add code
+    - add .gitignore
+    - deploy
+  - DO
+    - explain the costs
+  - Terraform
+    - explain state files
+    - explain why we cannot commit it, and must use S3 
+    - commit each part
+    - work with docs
+    - 
+  
 
 
 DO App creation list 
@@ -106,4 +121,6 @@ https://docs.digitalocean.com/products/databases/postgresql/how-to/connect/
 
 psql "connstr" -f ./path/to/file
 
+
+https://slides.app.goo.gl/Uzhgb
 

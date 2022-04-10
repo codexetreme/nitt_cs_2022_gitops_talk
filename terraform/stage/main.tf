@@ -43,7 +43,7 @@ resource "digitalocean_app" "gitops-app" {
     service {
       name               = "students-app"
       environment_slug   = "go"
-      instance_count     = 1
+      instance_count     = 10
       instance_size_slug = "professional-xs"
       image {
         registry_type = "DOCR"
